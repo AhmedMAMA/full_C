@@ -11,9 +11,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define LENGTH(XX) fgetc(XX)<<8 |fgetc(XX) 
+#define LENGTH(XX) fgetc(XX) << 8 | fgetc(XX)
 
+/**
+ * @brief Permettre d'extraction de la table de quantification des images JPEG.
+ */
 
+typedef struct QuantizationTable
+{
+    uint8_t precision;
+    uint8_t id;
+    uint16_t values[64];
+} QuantizationTable;
+
+/**
+ * @brief Permettre l'extaction de tous nos données issues des images JPEG
+ */
 typedef struct EdImage
 {
     int height,  // Champs hauteur de l'image
@@ -24,20 +37,24 @@ typedef struct EdImage
 
 } EdImage;
 
-typedef struct QuantizationTable
+/**
+ * @brief Permettre l'extaction de la table de Huffman des images JPEG
+ */
+typedef struct HuffmanTable
 {
-    int dest; // Taille total de notre matrix X
-    uint8_t *matrix;
-    /* data */
-}QuantizationTable;
+    
+};
+
+
 
 /**
  * @brief Définir le chams de résolution de notre image JPEG ( height,width, channel)
  */
-EdImage *findResolution(FILE *f);
+void *ReadSize(FILE *file, EdImage *image);
 
-/** 
+/**
  * @brief Définir la table de décodage de notre image JPEG ( Zone DB)
  */
-void decodageMCU(FILE *file,EdImage* image);
+QuantizationTable *ReadDQT(FILE *file, int *nb_tables);
+
 #endif
