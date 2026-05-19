@@ -1,0 +1,81 @@
+# Généralité d'une image JPEG
+Une image JPEG est structurée comme suit :
+
+<div>
+    FF D8 — <span style="background:black;color:white">
+    Indicateur de début d'image (SOI : Start Of Image)
+    </span>
+</div>
+
+<div>
+    FF E0 — <span style="background:black;color:white">
+    Segment APP0/JFIF contenant des informations techniques
+    (version JPEG, résolution, densité de pixels, miniature...)
+    </span>
+</div>
+
+<div>
+    FF E1 — <span style="background:black;color:white">
+    Segment EXIF (date, GPS, appareil photo, etc.)
+    </span>
+</div>
+
+<div>
+    FF DB — <span style="background:black;color:white">
+    Segment contenant la table de quantification utilisée pour compresser et décompresser l'image JPEG
+    </span>
+</div>
+
+<div>
+    FF C0 — <span style="background:black;color:white">
+    Segment contenant les informations sur l'image :
+    dimensions, précision des composantes et nombre de canaux de couleur
+    (grayscale, RGB, YCbCr...)
+    </span>
+</div>
+
+<div>
+    FF C4 — <span style="background:black;color:white">
+    Segment contenant les tables de Huffman utilisées pour décoder
+    les données compressées de l'image JPEG
+    </span>
+</div>
+
+<div>
+    FF DA — <span style="background:black;color:white">
+    Segment contenant toutes notre valeurs pixels compressé.
+    </span>
+</div>
+<div>
+    FF D9 — <span style="background:black;color:white">
+   Indicateur de fin d'image jpag
+    </span>
+</div>
+
+<!-- ```md -->
+**Dans une image jpeg on peut avoir au moins n ≥ 2 de table de dans** <span style="color:magenta;font-weight:bold;">DB, C4 & DA</span>
+
+# Structure générale d'un segment JPEG
+### <span style="color:blue;font-weight:bold;">FF</span> <span style="color:magenta;font-weight:bold;"> Marker ID</span> <span style="color:green;font-weight:bold;"> Segment Length</span> <span style="color:yellow;font-weight:bold;"> Segment Data</span>
+
+# Point clé dans la structure générale d'une image Jpeg
+## Section ***<span style="color:yellow;font-weight:bold;"> segment Data</span>***
+
+### Segment DB 
+
+Le segments data contient entre autre:
+* Le **Tc** : qui est le type de données encodé(0: valeur moyenne du bloc, 1: detail|haute fréquences du bloc)
+* Le **Th** : qui est la table utilisé pour exécuter de décodage/encodage
+``` md
+Ces deux champs sont encodés dans  dans mon code par classe ou par correspondance on a :
++------------+-----------+
+|hexadécimal | Décimale  |
+|------------|-----------|
+| 00         | 0         |
+| 01         | 1         |
+| 10         | 2         |
+| 11         | 3         |
++------------+-----------+
+```
+### >Command
+gcc main_test.c ../src/EdImageScan.c -o test

@@ -21,6 +21,7 @@ int main(int argc, char const *argv[])
 
 
     // Analyse d'une section de notre jpeg
-    printf_ShowSection(0xC4,f);
+    // printf_ShowSection(0xC4,f);
+    showAllMark();
 
 }
