@@ -1,22 +1,10 @@
 img/
 
-main/
+libs/
 
-libs/debugFunction.h
+src/
 
-libs/EdImageStruct.h
-
-src/debug
-
-src/debugFunction.c
-
-src/EdImageScan.c
-
-src/main_test.c
-
-src/test
-
-src/trans_binary.c
+note/
 
 todo/
 
